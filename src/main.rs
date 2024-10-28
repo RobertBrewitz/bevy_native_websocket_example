@@ -1,6 +1,5 @@
 use bevy::prelude::*;
 
-mod appsync;
 mod handshake;
 mod native_websocket;
 
