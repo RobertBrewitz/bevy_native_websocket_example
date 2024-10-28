@@ -19,3 +19,10 @@ Correctly configured AppSync API and auth method should connect to the endpoint 
 ## Authorization
 
 I am using a custom lambda in my project, see [https://docs.aws.amazon.com/appsync/latest/devguide/security-authz.html](https://docs.aws.amazon.com/appsync/latest/devguide/security-authz.html) for more information.
+
+## Licenses
+
+Dual licensed under:
+
+- MIT license ([MIT-LICENSE](./MIT-LICENSE) or [https://opensource.org/licenses/MIT](https://opensource.org/licenses/MIT))
+- Apache License, Version 2.0 ([APACHE-LICENSE](./APACHE-LICENSE) or [https://www.apache.org/licenses/LICENSE-2.0](https://www.apache.org/licenses/LICENSE-2.0))
