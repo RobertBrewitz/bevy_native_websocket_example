@@ -15,8 +15,11 @@ fn main() {
     // Native websocket stuff
     app.add_event::<AppSignal>();
     app.add_plugins(NativeWebsocketPlugin);
-    app.add_systems(Startup, connect_to_endpoint);
-    app.add_systems(Update, log_message_received);
+    app.add_systems(Startup, (connect_to_endpoint, startup_system));
+    app.add_systems(
+        Update,
+        (log_message_received, demonstrate_websocket_is_non_blocking),
+    );
 
     app.run();
 }
@@ -44,4 +47,21 @@ pub enum AppSignal {
 
     SendMessage(WebsocketMessage),
     ReceiveMessage(WebsocketMessage),
+}
+
+#[derive(Component)]
+struct LogTimer(Timer);
+
+fn startup_system(mut cmd: Commands) {
+    cmd.spawn(LogTimer(Timer::from_seconds(5.0, TimerMode::Repeating)));
+}
+
+fn demonstrate_websocket_is_non_blocking(time: Res<Time>, mut timer: Query<&mut LogTimer>) {
+    for mut timer in timer.iter_mut() {
+        timer.0.tick(time.delta());
+
+        if timer.0.finished() {
+            println!("This is a non-blocking websocket implementation");
+        }
+    }
 }

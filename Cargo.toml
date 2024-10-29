@@ -15,6 +15,6 @@ dotenv = "0.15.0"
 mio = { version = "1.0.2", default-features = false, features = ["net", "os-poll"] }
 url = { version = "2.5.2", default-features = true }
 crossbeam-channel = "0.5.13"
-tungstenite = { version = "0.24.0", features = ["native-tls", "http", "handshake"] }
+tungstenite = { version = "0.24.0", features = ["http", "handshake"] }
 native-tls = '0.2.12'
 

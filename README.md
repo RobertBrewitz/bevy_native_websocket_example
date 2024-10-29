@@ -4,6 +4,12 @@ Done in short notice to provide some examples of how to use websockets in Bevy.
 
 This is an excerpt of a Native Websocket example that can be used to connect to any tls (wss) websocket endpoint.
 
+## Key libraries
+
+- [Mio](https://github.com/tokio-rs/mio) - cross-platform UDP/TCP non-blocking I/O
+- [NativeTls](https://github.com/sfackler/rust-native-tls) - Platform specific TLS/SSL wrabstractions for Rust
+- [Tungstenite](https://github.com/snapview/tungstenite-rs) - Barebones Websocket library for Rust
+
 ## Testing with AppSync
 
 Create an AppSync endpoint and create a .env file based on the .env.example file and input the AppSync endpoint.
