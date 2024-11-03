@@ -134,6 +134,27 @@ fn tls_stream_handshake(
         )
         .expect("Could not register stream with poll");
 
+    loop {
+        poll.poll(&mut events, None)?;
+        let mut connected = false;
+        for event in events.iter() {
+            if event.token() == token {
+                if event.is_writable() {
+                    if let Some(err) = tcp_stream.take_error()? {
+                        return Err(Box::new(err));
+                    }
+                    connected = true;
+                    break;
+                } else if event.is_read_closed() || event.is_write_closed() {
+                    return Err("Connection closed".into());
+                }
+            }
+        }
+        if connected {
+            break;
+        }
+    }
+
     let tls_stream = match tls_connector.connect(domain, tcp_stream) {
         Ok(tls_stream) => tls_stream,
         Err(native_tls::HandshakeError::WouldBlock(mut mid_handshake)) => {
